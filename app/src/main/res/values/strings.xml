@@ -1,0 +1,15 @@
+<resources>
+    <string name="btn_cadastrar">Cadastrar</string>
+    <string name="btn_Salvar_cadastro">Salvar cadastro</string>
+    <string name="btn_Esqueci_a_senha">Esqueci a senha</string>
+    <string name="btn_entrar">Entrar</string>
+    <string name="btn_salvar">Salvar</string>
+    <string name="email_hint">Digite seu e-mail</string>
+    <string name="senha_hint">Digite sua senha</string>
+    <string name="nome_hint">Digite seu nome</string>
+    <string name="logo_descricao">Logo do aplicativo</string>
+    <string name="tipo_onivoro">Onívoro</string>
+    <string name="tipo_Carnivoro">Carnívoro</string>
+    <string name="tipo_vegano">Vegano</string>
+    <string name="tipo_vegetariano">Vegetariano</string>
+</resources>
