@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "533180482423",
+    "project_id": "projetointegradosmartchef",
+    "storage_bucket": "projetointegradosmartchef.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:533180482423:android:43485ba73a720ffe0fd772",
+        "android_client_info": {
+          "package_name": "com.example.smartchef"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVUxyBbVn2cgcZd-TJVx9xzuLVjAkKb0I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
