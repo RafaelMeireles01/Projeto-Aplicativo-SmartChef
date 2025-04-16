@@ -7,10 +7,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.example.smartchef.databinding.ActivityMainBinding
+import com.google.firebase.auth.FirebaseAuth
+//import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import java.io.IOException
+import java.security.GeneralSecurityException
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,19 +26,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Inicializa o Firebase Auth
-        auth = Firebase.auth
+        auth = FirebaseAuth.getInstance()
 
         // Configura SharedPreferences criptografado
-        val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
-        encryptedSharedPreferences = EncryptedSharedPreferences.create(
-            "auth_prefs",
-            masterKeyAlias,
-            this,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        ) as EncryptedSharedPreferences
+        try {
+            val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
 
-        // Verifica se usuário já está logado
+            encryptedSharedPreferences = EncryptedSharedPreferences.create(
+                "auth_prefs",
+                masterKeyAlias,
+                this,
+                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            ) as EncryptedSharedPreferences
+        } catch (e: GeneralSecurityException) {
+            showErrorAndFinish("Erro de segurança ao configurar armazenamento")
+        } catch (e: IOException) {
+            showErrorAndFinish("Erro de IO ao configurar armazenamento")
+        }
+
         checkUserLoggedIn()
 
         binding.btnCadastrar.setOnClickListener {
@@ -51,11 +59,11 @@ class MainActivity : AppCompatActivity() {
                 autenticarUsuario(email, senha)
             }
         }
+    }
 
-        binding.btnEsqueciASenha.setOnClickListener {
-            // Implemente a recuperação de senha se necessário
-            startActivity(Intent(this, RecuperarSenhaActivity::class.java))
-        }
+    private fun showErrorAndFinish(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+        finish()
     }
 
     private fun checkUserLoggedIn() {
@@ -94,36 +102,32 @@ class MainActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, senha)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Login bem-sucedido
                     val user = auth.currentUser
                     user?.getIdToken(true)?.addOnCompleteListener { tokenTask ->
                         if (tokenTask.isSuccessful) {
                             val token = tokenTask.result?.token
-                            // Armazena o token JWT de forma segura
                             encryptedSharedPreferences.edit()
                                 .putString("user_token", token)
                                 .putString("user_email", email)
                                 .apply()
 
-                            // Redireciona para a tela principal
                             startActivity(Intent(this, IngredientesActivity::class.java))
                             finish()
                         } else {
-                            Toast.makeText(
-                                this,
-                                "Falha ao obter token: ${tokenTask.exception?.message}",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            showAuthError(tokenTask.exception?.message)
                         }
                     }
                 } else {
-                    // Se o login falhar, exibe uma mensagem para o usuário
-                    Toast.makeText(
-                        this,
-                        "Autenticação falhou: ${task.exception?.message}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showAuthError(task.exception?.message)
                 }
             }
+    }
+
+    private fun showAuthError(message: String?) {
+        Toast.makeText(
+            this,
+            "Autenticação falhou: ${message ?: "Erro desconhecido"}",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 }

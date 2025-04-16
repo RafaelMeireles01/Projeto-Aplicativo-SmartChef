@@ -6,7 +6,7 @@ import android.util.Patterns
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
+//import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -20,7 +20,7 @@ class CadastroActivity : AppCompatActivity() {
         setContentView(R.layout.activity_cadastro)
 
         // Inicializa o Firebase Auth
-        auth = Firebase.auth
+        auth = FirebaseAuth.getInstance()
 
         val btnSalvar = findViewById<Button>(R.id.btnSalvar_cadastro)
         val nomeInput = findViewById<EditText>(R.id.nomeInput)
