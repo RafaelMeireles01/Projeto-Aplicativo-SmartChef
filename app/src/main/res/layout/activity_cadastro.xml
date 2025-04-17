@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/backgroundYellow"
+    android:padding="20dp">
+
+
+    <!-- Título -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cadastre-se"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"/>
+
+    <!-- Campos de Entrada -->
+    <EditText
+        android:id="@+id/nomeInput"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="48dp"
+        android:hint="Nome e Sobrenome"
+        android:background="@drawable/edittext_background"
+        android:padding="10dp"/>
+
+    <EditText
+        android:id="@+id/telefoneInput"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:hint="Telefone"
+        android:background="@drawable/edittext_background"
+        android:padding="10dp"/>
+
+    <EditText
+        android:id="@+id/emailInput"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:hint="E-Mail"
+        android:background="@drawable/edittext_background"
+        android:padding="10dp"/>
+
+
+    <EditText
+        android:id="@+id/senhaInput"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:hint="Senha"
+        android:background="@drawable/edittext_background"
+        android:padding="10dp"
+        android:inputType="textPassword"/>
+
+    <!-- Preferências Alimentares -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Preferência Alimentar:"/>
+
+    <RadioGroup
+        android:id="@+id/preferenciaAlimentar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal">
+
+        <RadioButton android:id="@+id/vegano" android:text="Vegano"/>
+        <RadioButton android:id="@+id/vegetariano" android:text="Vegetariano"/>
+        <RadioButton android:id="@+id/Carnivoro" android:text="Carnívoro"/>
+        <RadioButton android:id="@+id/onivoro" android:text="Onívoro"/>
+    </RadioGroup>
+
+    <!-- Nível de Experiência -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Nível de Experiência:"/>
+
+    <RadioGroup
+        android:id="@+id/nivelExperiencia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal">
+
+        <RadioButton android:id="@+id/novato" android:text="Novato"/>
+        <RadioButton android:id="@+id/intermediario" android:text="Intermediário"/>
+        <RadioButton android:id="@+id/expert" android:text="Expert"/>
+    </RadioGroup>
+
+    <!-- Botão Cadastrar -->
+    <Button
+        android:id="@+id/btnSalvar_cadastro"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_Salvar_cadastro"
+        android:textSize="18sp"
+        android:background="@drawable/button_background"
+        android:padding="10dp"
+        android:layout_marginTop="48dp"/>
+
+</LinearLayout>

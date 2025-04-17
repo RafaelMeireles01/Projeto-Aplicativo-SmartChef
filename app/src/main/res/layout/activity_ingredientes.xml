@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4A8A8">
+
+    <!-- Barra de Pesquisa -->
+    <EditText
+        android:id="@+id/search_bar_ingredients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="Pesquisar por um ingrediente da sua lista"
+        android:padding="10dp"
+        android:background="@drawable/search_background" />
+
+    <!-- Botões -->
+    <LinearLayout
+        android:id="@+id/button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_bar_ingredients"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/btn_add_to_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adicionar à sua lista"
+            android:backgroundTint="#FF6666"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btn_random_recipes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lista de receitas aleatórias"
+            android:backgroundTint="#FF6666"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="10dp" />
+    </LinearLayout>
+
+
+
+    <!-- Formulário para Adicionar Ingrediente -->
+    <RelativeLayout
+        android:id="@+id/form_add_ingredient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/form_background"
+        android:padding="16dp"
+        android:visibility="gone"
+        android:layout_centerInParent="true">
+
+        <Button
+            android:id="@+id/btn_close_form"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#FF0000"
+            android:layout_alignParentEnd="true" />
+
+        <EditText
+            android:id="@+id/input_ingredient_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nome do Ingrediente"
+            android:padding="10dp"
+            android:layout_below="@id/btn_close_form"
+            android:layout_marginTop="10dp" />
+
+        <EditText
+            android:id="@+id/input_ingredient_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Quantidade"
+            android:padding="10dp"
+            android:layout_below="@id/input_ingredient_name"
+            android:layout_marginTop="10dp" />
+
+        <EditText
+            android:id="@+id/input_ingredient_expiry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Data de Validade"
+            android:padding="10dp"
+            android:layout_below="@id/input_ingredient_quantity"
+            android:layout_marginTop="10dp" />
+
+        <Button
+            android:id="@+id/btn_save_ingredient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Salvar"
+            android:backgroundTint="#007BFF"
+            android:textColor="@android:color/white"
+            android:layout_below="@id/input_ingredient_expiry"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+</RelativeLayout>
