@@ -24,6 +24,8 @@
 
         <!-- Adicionando CadastroActivity ao Manifest -->
         <activity android:name=".CadastroActivity" android:exported="false" />
+        <activity android:name=".IngredientesActivity" android:exported="false" />
+        <activity android:name=".ReceitasActivity" android:exported="false" />
 
     </application>
 

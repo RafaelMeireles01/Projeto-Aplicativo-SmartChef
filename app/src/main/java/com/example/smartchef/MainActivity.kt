@@ -1,6 +1,7 @@
 package com.example.smartchef
 
 import android.content.Intent
+import android.view.View
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
@@ -54,6 +55,71 @@ class MainActivity : AppCompatActivity() {
                 autenticarUsuario(email, senha)
             }
         }
+
+        binding.btnEsqueciASenha.setOnClickListener {
+            showRecoveryForm()
+        }
+    }
+
+    private fun showRecoveryForm() {
+        binding.recoveryForm.visibility = View.VISIBLE
+
+        binding.btnRecoverySubmit.setOnClickListener {
+            val email = binding.recoveryEmail.text.toString().trim()
+            val telefone = binding.recoveryPhone.text.toString().trim()
+
+            if (email.isEmpty()) {
+                binding.recoveryEmail.error = "Por favor, insira seu e-mail"
+                return@setOnClickListener
+            }
+
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                binding.recoveryEmail.error = "Por favor, insira um e-mail válido"
+                return@setOnClickListener
+            }
+
+            processRecoveryRequest(email, telefone)
+        }
+
+        binding.btnRecoveryCancel.setOnClickListener {
+            binding.recoveryForm.visibility = View.GONE
+            binding.recoveryEmail.text.clear()
+            binding.recoveryPhone.text.clear()
+        }
+    }
+
+    private fun processRecoveryRequest(email: String, telefone: String) {
+        val usuario = UsuarioManager.getUsuarios().find { it.email == email }
+
+        if (usuario == null) {
+            Toast.makeText(this, "E-mail não encontrado em nosso cadastro", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val telefoneCorresponde = telefone.isNotEmpty() && usuario.telefone == telefone
+
+        if (telefoneCorresponde) {
+            sendRecoveryEmail(usuario.email)
+            sendRecoverySMS(usuario.telefone)
+            Toast.makeText(this, "Instruções enviadas para seu e-mail e telefone", Toast.LENGTH_SHORT).show()
+        } else {
+            sendRecoveryEmail(usuario.email)
+            Toast.makeText(this, "Instruções enviadas para seu e-mail", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.recoveryForm.visibility = View.GONE
+        binding.recoveryEmail.text.clear()
+        binding.recoveryPhone.text.clear()
+    }
+
+    private fun sendRecoveryEmail(email: String) {
+        println("Email enviado para $email com instruções para redefinir senha")
+        // Implementação real iria aqui
+    }
+
+    private fun sendRecoverySMS(telefone: String) {
+        println("SMS enviado para $telefone com instruções para redefinir senha")
+        // Implementação real iria aqui
     }
 
     private fun showErrorAndFinish(message: String) {

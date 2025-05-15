@@ -20,6 +20,10 @@ object UsuarioManager {
         }
     }
 
+    fun buscarPorEmail(email: String): Usuario? {
+        return usuarios.find { it.email == email }
+    }
+
     fun getCurrentUser(): Usuario? = currentUser
 
     fun logout() {

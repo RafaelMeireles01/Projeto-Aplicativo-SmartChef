@@ -21,7 +21,7 @@ android {
 
         kotlinOptions {
             jvmTarget = "11"
-            jvmTarget = "17"
+
         }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
